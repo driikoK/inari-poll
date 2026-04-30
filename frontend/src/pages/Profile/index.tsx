@@ -1,79 +1,85 @@
-import { H6, P } from '@/components';
-import { useAuthStore } from '@/stores';
-import { Box, Button, Input } from '@mui/material';
-import { TitleWrapper } from '../CookieList/styles';
-import { PageWrapper } from '../Result/styles';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { userRoleOptions } from '@/utils/constants';
+import { Button, TextField } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
+
+import { useAuthStore } from '@/stores';
+import { userRoleOptions } from '@/utils/constants';
+import { ROLE } from '@/context/casl';
+import styles from './Profile.module.scss';
+
+const ROLE_COLOR: Record<string, string> = {
+  [ROLE.ADMIN]: 'var(--accent)',
+  [ROLE.DIRECTOR]: 'var(--teal)',
+  [ROLE.MEMBER]: 'var(--text-muted)',
+};
 
 const Profile = () => {
   const { user, updateUser } = useAuthStore();
+  const [email, setEmail] = useState(user?.email || '');
 
-  const [email, setEmail] = useState<string>(user?.email || '');
-
-  const handleOnClick = async () => {
+  const handleSaveEmail = async () => {
     try {
       await updateUser(user!._id, user!.role, email);
       toast.success('Успішно оновлено');
-    } catch (error) {}
+    } catch {}
   };
 
-  const userRole = userRoleOptions.find((role) => role.value === user?.role)?.label;
-  const userInfo = [
-    { label: 'Юзернейм', value: user?.username },
-    { label: 'Роль', value: userRole },
-  ];
+  const roleLabel = userRoleOptions.find((r) => r.value === user?.role)?.label ?? user?.role;
+  const roleColor = ROLE_COLOR[user?.role ?? ''] ?? 'var(--text-muted)';
+  const avatarLetter = user?.username?.[0] ?? '?';
 
   return (
-    <PageWrapper>
-      <TitleWrapper>
-        <H6 sx={(theme) => ({ color: theme.palette.secondary.main })}>Профіль</H6>
-      </TitleWrapper>
+    <main className={styles.page}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Профіль</h1>
+        <p className={styles.subtitle}>Твої особисті дані</p>
+      </header>
 
-      <Box
-        sx={{
-          backgroundColor: 'white',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: 2,
-        }}
-      >
-        <div>
-          {userInfo.map((info) => (
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 2,
-                alignItems: 'center',
-                justifyContent: 'space-between',
+      <article className={styles.card}>
+        <section className={styles.avatarRow}>
+          <span className={styles.avatar} aria-hidden="true">{avatarLetter}</span>
+          <div className={styles.avatarInfo}>
+            <h2 className={styles.username}>{user?.username}</h2>
+            <span
+              className={styles.roleBadge}
+              style={{
+                color: roleColor,
+                background: `${roleColor}18`,
+                border: `1px solid ${roleColor}40`,
               }}
             >
-              <P>{info.label}: </P> <P>{info.value}</P>
-            </Box>
-          ))}
+              {roleLabel}
+            </span>
+          </div>
+        </section>
 
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-            <P>Email: </P>
-            <Box sx={{ display: 'flex' }}>
-              <Input
-                placeholder="Введіть email"
-                value={email}
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Button disabled={!email} onClick={handleOnClick}>
-                <CheckIcon sx={(theme) => ({ color: theme.palette.secondary.contrastText })} />
-              </Button>
-            </Box>
-          </Box>
-        </div>
-      </Box>
-    </PageWrapper>
+        <hr className={styles.divider} />
+
+        <section className={styles.fieldRow}>
+          <label className={styles.fieldLabel} htmlFor="profile-email">Email</label>
+          <div className={styles.emailRow}>
+            <TextField
+              id="profile-email"
+              size="small"
+              placeholder="Введіть email"
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              sx={{ flex: 1 }}
+            />
+            <Button
+              variant="contained"
+              disabled={!email || email === user?.email}
+              onClick={handleSaveEmail}
+              sx={{ minWidth: 0, px: 1.5 }}
+            >
+              <CheckIcon fontSize="small" />
+            </Button>
+          </div>
+        </section>
+      </article>
+    </main>
   );
 };
 
