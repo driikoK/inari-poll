@@ -14,7 +14,6 @@ export const CustomTable = <T extends GridValidRowModel>({
   return (
     <Paper
       sx={{
-        height: '71vh',
         width: '100%',
         '& .cell-red': {
           color: 'var(--red)',
@@ -41,6 +40,7 @@ export const CustomTable = <T extends GridValidRowModel>({
           },
         }}
         pageSizeOptions={[10, 25, 50]}
+        autoHeight
         disableRowSelectionOnClick
         disableColumnMenu
         disableColumnFilter
