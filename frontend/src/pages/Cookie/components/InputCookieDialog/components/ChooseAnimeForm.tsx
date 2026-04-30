@@ -18,7 +18,8 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import { ChooseAnimeFormValues } from '../types';
 import { DialogFormWrapper, FlexColumn, FlexRow } from '../styles';
 import { titleTypeOptions, chooseAnimeInitialFormValues, createChooseAnimeForm } from '../const';
-import { Button, SelectField, H6, ErrorText } from '@/components';
+import { Button as MuiButton } from '@mui/material';
+import { SelectField, H6, ErrorText } from '@/components';
 import { useAnimesStore, useMembersStore, useTracksStore } from '@/stores';
 import { seasonOptions, yearOptions } from '@/consts';
 import { ANIME_TYPE } from '@/types';
@@ -332,9 +333,9 @@ export const ChooseAnimeForm: FC<FormProps> = ({ saveFormValues, initialValues }
             </FormControl>
           </FlexRow>
 
-          <Button type="submit" color="inherit">
+          <MuiButton type="submit" variant="contained" fullWidth>
             Далі
-          </Button>
+          </MuiButton>
         </DialogFormWrapper>
       </form>
     </FormProvider>

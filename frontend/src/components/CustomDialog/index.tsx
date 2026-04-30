@@ -1,9 +1,8 @@
 import { PropsWithChildren } from 'react';
-import { DialogProps, IconButton } from '@mui/material';
+import { Button, DialogProps, IconButton } from '@mui/material';
 import Close from '@mui/icons-material/Close';
-import { DialogContainer, DialogBody, DialogHeader } from './styles';
-import { Button } from '@/components';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { DialogContainer, DialogBody, DialogHeader } from './styles';
 
 type CustomDialogProps = {
   onClose: () => void;
@@ -22,7 +21,7 @@ const CustomDialog = ({ onClose, onBack, isShowBack, open, children }: CustomDia
     <DialogContainer open={open} onClose={handleClose} fullWidth scroll="body">
       <DialogHeader>
         {isShowBack && (
-          <Button startIcon={<ArrowBackIcon />} onClick={onBack} sx={{ paddingLeft: '20px' }}>
+          <Button startIcon={<ArrowBackIcon />} onClick={onBack} sx={{ paddingLeft: '20px' }} color="secondary">
             Назад
           </Button>
         )}

@@ -12,11 +12,12 @@ import { BasicTrackProps, CreateTrackFormValues, CreateTrackType, FieldFormValue
 import { CheckboxWrapper } from '../styles';
 import { CoinsType } from '@/types';
 import { useAuthStore, useMembersStore, useTracksStore } from '@/stores';
-import { Button, H6, P, Subtitle } from '@/components';
+import { H6, P, Subtitle } from '@/components';
 import useCoinsCalculation from '../hooks/useCoinsCalculation';
 import { startNameForMemberField } from '../const';
 import { useCoinsByDuration, useWatchCheckboxValues, useWatchNicknames } from '../hooks';
 import { checkIsOnlyOneEpisode, finalizeMembersInfoArray } from '../helpers';
+import { Button as MuiButton } from '@mui/material';
 
 export const CreateTrackForm: FC<BasicTrackProps> = ({
   titleName,
@@ -54,23 +55,28 @@ export const CreateTrackForm: FC<BasicTrackProps> = ({
   const transformMembersInfo = (
     membersInfo: CreateTrackFormValues['membersInfo'],
     coins: CoinsType,
-    lastTracks?: { typeRole: string; nickname: string }[]
+    lastTracks?: { typeRole: string; nickname: string }[],
   ): CreateTrackFormValues['membersInfo'] => {
-    return Object.entries(membersInfo).reduce((acc, [key, value]) => {
-      if (Array.isArray(value)) {
-        (acc[key as keyof CreateTrackFormValues['membersInfo']] as FieldFormValue[]) = [
-          ...findTracksByKey(key, value),
-        ];
-      } else {
-        (acc[key as keyof CreateTrackFormValues['membersInfo']] as FieldFormValue) = {
-          ...value,
-          coins: coins[key as keyof typeof coins].toString(),
-          nickname:
-            lastTracks?.find((track) => track.typeRole === key)?.nickname || value?.nickname || '',
-        };
-      }
-      return acc;
-    }, {} as CreateTrackFormValues['membersInfo']);
+    return Object.entries(membersInfo).reduce(
+      (acc, [key, value]) => {
+        if (Array.isArray(value)) {
+          (acc[key as keyof CreateTrackFormValues['membersInfo']] as FieldFormValue[]) = [
+            ...findTracksByKey(key, value),
+          ];
+        } else {
+          (acc[key as keyof CreateTrackFormValues['membersInfo']] as FieldFormValue) = {
+            ...value,
+            coins: coins[key as keyof typeof coins].toString(),
+            nickname:
+              lastTracks?.find((track) => track.typeRole === key)?.nickname ||
+              value?.nickname ||
+              '',
+          };
+        }
+        return acc;
+      },
+      {} as CreateTrackFormValues['membersInfo'],
+    );
   };
 
   const defaultValues: CreateTrackFormValues = useMemo(() => {
@@ -273,9 +279,9 @@ export const CreateTrackForm: FC<BasicTrackProps> = ({
             </CheckboxWrapper>
           </Box>
 
-          <Button type="submit" color="inherit">
+          <MuiButton type="submit" variant="contained" fullWidth>
             Зберегти
-          </Button>
+          </MuiButton>
         </Box>
       </form>
     </FormProvider>
