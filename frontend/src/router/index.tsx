@@ -10,12 +10,11 @@ const Cookie = lazy(() => import('../pages/Cookie'));
 const Home = lazy(() => import('../pages/Home'));
 const CookieRating = lazy(() => import('../pages/CookieRating'));
 const CookieList = lazy(() => import('../pages/CookieList'));
-const Login = lazy(() => import('../pages/Login'));
+const Auth = lazy(() => import('../pages/Auth'));
 const Settings = lazy(() => import('../pages/Settings'));
 const Profile = lazy(() => import('../pages/Profile'));
 const ForgotPassword = lazy(() => import('../pages/ForgotPassword'));
 const ResetPassword = lazy(() => import('../pages/ResetPassword'));
-const SignUp = lazy(() => import('../pages/SignUp'));
 
 const conditionalRoutes = (condition: boolean, route: RouteObject) => (condition ? [route] : []);
 
@@ -33,7 +32,7 @@ const useConditionalRoutes = () => {
         },
         {
           path: 'login',
-          element: <Login />,
+          element: <Auth />,
         },
         ...conditionalRoutes(process.env.VITE_FEATURE_POLL === 'true', {
           path: 'vote',
@@ -44,7 +43,7 @@ const useConditionalRoutes = () => {
           {
             path: 'result',
             element: <Result />,
-          }
+          },
         ),
         {
           path: 'cookie',
@@ -75,12 +74,8 @@ const useConditionalRoutes = () => {
           element: <ResetPassword />,
         },
         {
-          path: 'sign-up',
-          element: <SignUp />,
-        },
-        {
           path: '*',
-          element: <Home />,
+          element: <Auth />,
         },
       ],
     },

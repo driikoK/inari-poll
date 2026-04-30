@@ -2,36 +2,33 @@ import { Button } from '@mui/material';
 import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
-  ${({ theme }) =>
-    theme.mq({
-      padding: ['16px', '16px', '20px 80px', '20px 80px'],
-    })};
+  padding: 32px;
+  max-width: 900px;
 `;
 
 export const CardsWrapper = styled.div`
   display: grid;
   flex-wrap: wrap;
-  margin: 20px 0px 20px 0px;
-  grid-gap: 25px;
+  margin: 20px 0;
+  grid-gap: 14px;
   ${({ theme }) =>
     theme.mq({
       justifyItems: 'center',
-      gap: ['10px', '10px', '25px', '25px'],
+      gap: ['10px', '10px', '14px', '14px'],
       gridTemplateColumns: [
-        'repeat(auto-fill, minmax(250px, 1fr))',
-        'repeat(auto-fill, minmax(250px, 1fr))',
-        'repeat(auto-fill, minmax(300px, 1fr))',
-        'repeat(auto-fill, minmax(300px, 1fr))',
+        'repeat(auto-fill, minmax(220px, 1fr))',
+        'repeat(auto-fill, minmax(220px, 1fr))',
+        'repeat(auto-fill, minmax(240px, 1fr))',
+        'repeat(auto-fill, minmax(240px, 1fr))',
       ],
     })};
 `;
 
 export const TitleWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors.title};
-  padding: 16px;
-  width: 100%;
-  text-align: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
 `;
 
 export const SubmitButton = styled(Button)`

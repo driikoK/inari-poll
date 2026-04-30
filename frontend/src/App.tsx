@@ -11,17 +11,15 @@ import { useAuthStore } from '@/stores';
 import AbilityContext, { SUBJECTS } from '@/context/casl';
 import { FallbackComponent } from '@/components';
 
+const PATHS_FOR_UNLOGGED_USER = ['/login', '/home', '/forgot-password', '/sign-up'];
+
 function RequireAuth({ children }: PropsWithChildren) {
   const location = useLocation();
   const { isLoggedIn, getCurrentUser, user } = useAuthStore();
 
   const pathname = location.pathname;
   const isPathForUnloggedUser =
-    pathname === '/login' ||
-    pathname === '/home' ||
-    pathname === '/forgot-password' ||
-    pathname === '/sign-up' ||
-    pathname.startsWith('/reset/');
+    PATHS_FOR_UNLOGGED_USER.includes(pathname) || pathname.startsWith('/reset/');
 
   if (!isPathForUnloggedUser && !isLoggedIn) {
     window.location.replace('/login');
@@ -47,7 +45,7 @@ function App() {
       permissions,
       setPermissions,
     }),
-    [permissionLoaded, permissions]
+    [permissionLoaded, permissions],
   );
 
   return (

@@ -1,0 +1,127 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.25s ease;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.sidebarCollapsed {
+  width: 68px !important;
+}
+
+// Logo row
+.logoRow {
+  padding: 20px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logoAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.logoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logoName {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.nav {
+  flex: 1;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.navBtn {
+  padding: 10px 12px !important;
+  justify-content: flex-start !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--radius-sm) !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: var(--text-muted) !important;
+  white-space: nowrap;
+  transition: all 0.15s !important;
+
+  &:hover:not(.navBtnActive) {
+    background: var(--surface-2) !important;
+    color: var(--text) !important;
+  }
+}
+
+.navBtnCollapsed {
+  justify-content: center !important;
+  padding: 10px !important;
+  min-width: 0 !important;
+
+  // Remove startIcon margin so the icon is truly centered
+  :global(.MuiButton-startIcon) {
+    margin: 0 !important;
+  }
+}
+
+.navBtnActive {
+  background: var(--accent-dim) !important;
+  border-color: var(--accent-border) !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+.bottomSection {
+  padding: 12px 8px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.logoutBtn {
+  color: var(--red) !important;
+
+  &:hover {
+    background: var(--red-dim) !important;
+    color: var(--red) !important;
+  }
+}
+
+.loginBtn {
+  background: var(--accent-dim) !important;
+  border-color: var(--accent-border) !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+.svgIcon {
+  flex-shrink: 0;
+}

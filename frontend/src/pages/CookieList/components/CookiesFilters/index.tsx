@@ -3,25 +3,25 @@ import { useEffect, useState } from 'react';
 import { SelectWrapper } from './styles';
 import { SelectField } from '@/components';
 import { useAnimesStore, useRolesStore, useMembersStore, useTracksStore } from '@/stores';
-import { seasonOptions, yearOptions } from '@/consts';
+import { seasonOptions, yearOptions } from '@/utils/constants';
 
 export const CookiesFilters = () => {
   const { getTracks, appliedFilters } = useTracksStore();
 
   const [selectedSeason, setSelectedSeason] = useState<string | undefined>(
-    appliedFilters.season || undefined
+    appliedFilters.season || undefined,
   );
   const [selectedYear, setSelectedYear] = useState<string | undefined>(
-    appliedFilters.year || undefined
+    appliedFilters.year || undefined,
   );
   const [selectedAnime, setSelectedAnime] = useState<string | undefined>(
-    appliedFilters.nameTitle || undefined
+    appliedFilters.nameTitle || undefined,
   );
   const [selectedRole, setSelectedRole] = useState<string | undefined>(
-    appliedFilters.typeRole || undefined
+    appliedFilters.typeRole || undefined,
   );
   const [selectedUser, setSelectedUser] = useState<string | undefined>(
-    appliedFilters.nickname || undefined
+    appliedFilters.nickname || undefined,
   );
 
   const animeNames = useAnimesStore((state) => state.animeNames);

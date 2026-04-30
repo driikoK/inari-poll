@@ -10,8 +10,8 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.span`
-  font-family: ${({ theme }) => theme.font.family.montserrat};
-  color: white;
-  font-weight: 600;
-  font-size: 18px;
+  font-family: var(--font-head);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 22px;
 `;

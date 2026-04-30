@@ -1,0 +1,213 @@
+.page {
+  padding: 32px;
+}
+
+// Hero
+.hero {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #1a1535 0%, #0f1b2d 50%, #1a1535 100%);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+}
+
+.heroGlowTop {
+  position: absolute;
+  top: -60px;
+  right: 80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.heroGlowBottom {
+  position: absolute;
+  bottom: -40px;
+  left: 100px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, oklch(0.65 0.22 290 / 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.heroContent {
+  padding: 40px 48px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.heroBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+}
+
+.heroTitle {
+  font-family: var(--font-head);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.heroTitleAccent {
+  color: var(--accent);
+}
+
+.heroDescription {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.heroActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.heroImageWrapper {
+  width: 280px;
+  flex-shrink: 0;
+  padding: 24px 32px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.heroImage {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 2px solid var(--accent-border);
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5);
+}
+
+// Stats row
+.statsRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+// Stat card
+.statCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  flex: 1;
+  min-width: 32.5%;
+}
+
+.statCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.statCardLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.statCardValue {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-head);
+}
+
+.statCardSub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.statCardIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+// Leaderboard
+.leaderboard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 32.5%;
+}
+
+.leaderboardTitle {
+  font-family: var(--font-head);
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.leaderboardRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.leaderboardRank {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.leaderboardName {
+  flex: 1;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.leaderboardCoins {
+  font-family: var(--font-head);
+  font-weight: 700;
+}
+
+.leaderboardUnit {
+  font-size: 12px;
+  color: var(--text-muted);
+}

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { SelectWrapper } from './styles';
 import { SelectField } from '@/components';
 import { useMembersStore, useRolesStore } from '@/stores';
-import { seasonOptions, yearOptions } from '@/consts';
+import { seasonOptions, yearOptions } from '@/utils/constants';
 
 export const RatingFilters = () => {
   const [selectedSeason, setSelectedSeason] = useState<string>();
@@ -14,13 +14,19 @@ export const RatingFilters = () => {
   const roles = useRolesStore((state) => state.roles);
   const { getMembers, membersDictionary } = useMembersStore();
 
-  const seasonsOfTheYear = seasonOptions.reduce((acc, season) => {
-    yearOptions.forEach((year) => {
-      acc.push({ label: `${season.label} ${year.label}`, value: `${season.value} ${year.value}` });
-    });
+  const seasonsOfTheYear = seasonOptions.reduce(
+    (acc, season) => {
+      yearOptions.forEach((year) => {
+        acc.push({
+          label: `${season.label} ${year.label}`,
+          value: `${season.value} ${year.value}`,
+        });
+      });
 
-    return acc;
-  }, [] as { label: string; value: string }[]);
+      return acc;
+    },
+    [] as { label: string; value: string }[],
+  );
 
   useEffect(() => {
     getMembers({

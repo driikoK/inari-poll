@@ -2,12 +2,13 @@ import {
   FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   MenuItem,
+  OutlinedInput,
+  Select,
   SelectChangeEvent,
 } from '@mui/material';
 import Close from '@mui/icons-material/Close';
-
-import { StyledInput, StyledInputLabel, StyledSelect } from './styles';
 
 interface SelectFieldProps<T> {
   label?: string;
@@ -28,27 +29,22 @@ function SelectField<T extends string>({
 }: SelectFieldProps<T>) {
   const handleChange = (event: SelectChangeEvent<unknown> | undefined) => {
     if (event === undefined) return onChange(undefined);
-
     onChange(event.target.value as T | undefined);
   };
 
   return (
     <FormControl sx={{ width }}>
-      <StyledInputLabel id={`${label.toLowerCase()}-label`}>{label}</StyledInputLabel>
-      <StyledSelect
+      <InputLabel id={`${label.toLowerCase()}-label`}>{label}</InputLabel>
+      <Select
         labelId={`${label.toLowerCase()}-label`}
-        input={<StyledInput label={label} />}
+        input={<OutlinedInput label={label} />}
         value={value || ''}
         onChange={handleChange}
         disabled={disabled}
         endAdornment={
           value && (
             <InputAdornment sx={{ marginRight: '20px', cursor: 'pointer' }} position="end">
-              <IconButton
-                onClick={() => {
-                  handleChange(undefined);
-                }}
-              >
+              <IconButton onClick={() => handleChange(undefined)}>
                 <Close sx={{ width: '20px', height: '20px' }} />
               </IconButton>
             </InputAdornment>
@@ -56,9 +52,7 @@ function SelectField<T extends string>({
         }
         MenuProps={{
           PaperProps: {
-            style: {
-              maxHeight: '50%',
-            },
+            style: { maxHeight: '50%' },
           },
         }}
       >
@@ -67,7 +61,7 @@ function SelectField<T extends string>({
             {option.label}
           </MenuItem>
         ))}
-      </StyledSelect>
+      </Select>
     </FormControl>
   );
 }

@@ -1,15 +1,9 @@
-import styled, { keyframes } from 'styled-components';
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1turn); }
+}
 
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1turn);
-  }
-`;
-
-const rotateOpacity = keyframes`
+@keyframes rotateOpacity {
   0% {
     transform: rotate(0deg);
     opacity: 0.1;
@@ -18,27 +12,21 @@ const rotateOpacity = keyframes`
     transform: rotate(1turn);
     opacity: 1;
   }
-`;
+}
 
-const fallbackLoaderPulse = keyframes`
-  0% {
-    transform: scale(0.95);
-  }
-  70% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(0.95);
-  }
-`;
+@keyframes fallbackLoaderPulse {
+  0% { transform: scale(0.95); }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(0.95); }
+}
 
-export const FallbackSpinner = styled.div`
+.fallbackSpinner {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &.app-loader {
+  &.appLoader {
     height: 100vh;
     flex-direction: column;
 
@@ -55,9 +43,9 @@ export const FallbackSpinner = styled.div`
     box-sizing: border-box;
     position: relative;
 
-    .effect-1,
-    .effect-2,
-    .effect-3 {
+    .effect1,
+    .effect2,
+    .effect3 {
       width: 55px;
       height: 55px;
       border-radius: 50%;
@@ -66,27 +54,35 @@ export const FallbackSpinner = styled.div`
       box-sizing: border-box;
     }
 
-    .effect-1 {
+    .effect1 {
       position: absolute;
-      animation: ${rotate} 1s ease infinite;
+      animation: rotate 1s ease infinite;
     }
 
-    .effect-2 {
+    .effect2 {
       position: absolute;
-      animation: ${rotateOpacity} 1s ease infinite 0.1s;
+      animation: rotateOpacity 1s ease infinite 0.1s;
     }
 
-    .effect-3 {
-      animation: ${rotateOpacity} 1s ease infinite 0.2s;
+    .effect3 {
+      animation: rotateOpacity 1s ease infinite 0.2s;
     }
 
     .effects {
       transition: all 0.3s ease;
     }
   }
-`;
+}
 
-export const Blob = styled.div`
+.fallbackBlob {
   transform: scale(1);
-  animation: ${fallbackLoaderPulse} 2s infinite;
-`;
+  animation: fallbackLoaderPulse 2s infinite;
+}
+
+.logo {
+  display: block;
+  background-image: url(/logo.jpg);
+  background-size: contain;
+  height: 50px;
+  width: 50px;
+}

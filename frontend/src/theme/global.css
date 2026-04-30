@@ -1,4 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0d0b1e;
+  --surface: #161430;
+  --surface-2: #1e1b3a;
+  --surface-3: #252246;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --accent: oklch(0.72 0.22 290);
+  --accent-dim: oklch(0.72 0.22 290 / 0.15);
+  --accent-glow: oklch(0.72 0.22 290 / 0.25);
+  --accent-border: oklch(0.72 0.22 290 / 0.35);
+  --accent-text: #fff;
+  --violet: oklch(0.65 0.22 290);
+  --violet-dim: oklch(0.65 0.22 290 / 0.12);
+  --teal: oklch(0.7 0.16 185);
+  --teal-dim: oklch(0.7 0.16 185 / 0.12);
+  --orange: oklch(0.72 0.2 35);
+  --orange-dim: oklch(0.72 0.2 35 / 0.12);
+  --orange-light: oklch(0.7 0.1 40);
+  --yellow: #ede824;
+  --yellow-dim: rgba(237, 232, 36, 0.15);
+  --red: oklch(0.65 0.22 20);
+  --red-dim: oklch(0.65 0.22 20 / 0.12);
+  --green: oklch(0.68 0.18 145);
+  --text: #f0eefc;
+  --text-muted: rgba(240, 238, 252, 0.45);
+  --text-faint: rgba(240, 238, 252, 0.2);
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
 
 *,
 *::before,
@@ -9,7 +42,53 @@
   box-sizing: border-box;
 }
 
-html {
-  background-color: #161d16;
+html,
+body,
+#root {
   height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 3px;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.4s ease both;
+}
+.fade-up-1 {
+  animation-delay: 0.05s;
+}
+.fade-up-2 {
+  animation-delay: 0.1s;
+}
+.fade-up-3 {
+  animation-delay: 0.15s;
+}
+.fade-up-4 {
+  animation-delay: 0.2s;
 }

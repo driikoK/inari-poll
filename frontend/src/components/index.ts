@@ -4,6 +4,7 @@ import FallbackComponent from './Fallback';
 import Header from './Header';
 import { Icon } from './Icon';
 import Layout from './Layout';
+import Sidebar from './Sidebar';
 import SelectField from './SelectField';
 import { ConfirmTableChangeDialog } from './ConfirmTableChangeDialog';
 import { H5, H6, ErrorText, P, Subtitle } from './Typography';
@@ -18,6 +19,7 @@ export {
   Header,
   Icon,
   Layout,
+  Sidebar,
   SelectField,
   H5,
   H6,

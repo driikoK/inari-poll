@@ -45,7 +45,7 @@ const ForgotPassword = () => {
           <Button
             variant="text"
             size="small"
-            sx={{ cursor: 'pointer', color: 'black', textTransform: 'none' }}
+            sx={{ cursor: 'pointer', textTransform: 'none' }}
             onClick={() => navigate('/login')}
           >
             Повернутися до входу
@@ -53,7 +53,7 @@ const ForgotPassword = () => {
 
           <Button
             size="large"
-            sx={{ color: 'black', width: '100%', textTransform: 'none' }}
+            sx={{ width: '100%', textTransform: 'none' }}
             variant="contained"
             onClick={handleResetClick}
           >

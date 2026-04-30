@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { HeaderContainer, Logo, LogoWrapper, NavWrapper } from './styles';
 import { useAuthStore } from '@/stores';
 import { usePermissions } from '@/hooks';
 import { SUBJECTS } from '@/context/casl';
 import { H5, CustomBreadcrumbs } from '@/components';
+import styles from './Header.module.scss';
 
 const Header: FunctionComponent = () => {
   const navigate = useNavigate();
@@ -34,30 +34,30 @@ const Header: FunctionComponent = () => {
     isAdmin ? { title: 'Налаштування', link: '/settings' } : null,
     { title: 'Профіль', link: '/profile' },
     {
-      title: 'Вийти',
+      title: 'Вийти',
       link: '/logout',
       icon: <LogoutIcon />,
       onClick: handleLogout,
     },
   ];
 
-  const loggedOutLinks = [{ title: 'Увійти', link: '/login', icon: <LoginIcon /> }];
+  const loggedOutLinks = [{ title: 'Увійти', link: '/login', icon: <LoginIcon /> }];
 
   return (
-    <HeaderContainer>
-      <LogoWrapper onClick={() => navigate('/home')}>
-        <Logo />
+    <div className={styles.headerContainer}>
+      <div className={styles.logoWrapper} onClick={() => navigate('/home')}>
+        <div className={styles.logo} />
         <H5 sx={{ color: 'white', fontWeight: 'bold', cursor: 'pointer' }}>Inari</H5>
-      </LogoWrapper>
+      </div>
 
-      <NavWrapper>
+      <div className={styles.navWrapper}>
         {isLoggedIn ? (
           <CustomBreadcrumbs links={loggedInLinks} />
         ) : (
           <CustomBreadcrumbs links={loggedOutLinks} />
         )}
-      </NavWrapper>
-    </HeaderContainer>
+      </div>
+    </div>
   );
 };
 
