@@ -95,6 +95,7 @@ const CookieList: FunctionComponent = () => {
       editable: hasAccess(SUBJECTS.COOKIES_LIST_UPDATE) ? true : false,
       align: 'left',
       headerAlign: 'left',
+      cellClassName: () => 'cell-accent',
     },
     {
       field: 'currentEpisode',
