@@ -3,11 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 import Skeleton from '@mui/material/Skeleton';
 
-import { Container, ElementContainer, ElementImage } from './styles';
+import { Container, ElementContainer, ElementImage, ElementContent, ElementTitle } from './styles';
 import { CreateAnimeAndMemberDialog, InputCookieDialog } from '@/pages/Cookie/components';
 import { SUBJECTS } from '@/context/casl';
 import { usePermissions } from '@/hooks';
-import { Subtitle } from '@/components';
+import s from './Cookie.module.scss';
+
+const IMAGES = {
+  cookie: '/cookie.png',
+  foxes: '/foxes.png',
+  general: '/general.png',
+  roles: '/roles.png',
+};
 
 const Cookie: FunctionComponent = () => {
   const [openCookieDialog, setOpenCookieDialog] = useState(false);
@@ -24,10 +31,6 @@ const Cookie: FunctionComponent = () => {
 
   const navigate = useNavigate();
 
-  const handleLink = (link: string) => {
-    navigate(link);
-  };
-
   const { hasAccess } = usePermissions();
 
   const preloadImage = (imageKey: string, imageUrl: string) => {
@@ -37,45 +40,56 @@ const Cookie: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    preloadImage('cookie', '/cookie.png');
-    preloadImage('foxes', '/foxes.png');
-    preloadImage('general', '/general.png');
-    preloadImage('roles', '/roles.png');
+    preloadImage('cookie', IMAGES.cookie);
+    preloadImage('foxes', IMAGES.foxes);
+    preloadImage('general', IMAGES.general);
+    preloadImage('roles', IMAGES.roles);
   }, []);
 
   return (
-    <Container>
-      {hasAccess(SUBJECTS.ADD_COOKIES) && (
+    <div className={s.page}>
+      <div className={s.header}>
+        <div className={s.headerTitle}>Крихти</div>
+        <div className={s.headerSubtitle}>Управляй та переглядай крихти учасників</div>
+      </div>
+
+      <Container>
+        {hasAccess(SUBJECTS.ADD_COOKIES) && (
+          <Card
+            isLoaded={isAllImagesLoaded}
+            onClick={() => setOpenCookieDialog(true)}
+            imgUrl={IMAGES.cookie}
+            title="Додати крихти"
+            description="Записати нові крихти учасника"
+          />
+        )}
+
+        {hasAccess(SUBJECTS.ADD_MEMBERS) && (
+          <Card
+            isLoaded={isAllImagesLoaded}
+            onClick={() => setOpenAddUsersAndTitlesDialog(true)}
+            imgUrl={IMAGES.foxes}
+            title="Додати в лисятник"
+            description="Новий учасник або тайтл"
+          />
+        )}
+
         <Card
           isLoaded={isAllImagesLoaded}
-          onClick={() => setOpenCookieDialog(true)}
-          imgUrl="/cookie.png"
-          title="Додати нові крихти"
+          onClick={() => navigate('list')}
+          imgUrl={IMAGES.general}
+          title="Список крихт"
+          description="Переглянути всі записи"
         />
-      )}
 
-      {hasAccess(SUBJECTS.ADD_MEMBERS) && (
         <Card
           isLoaded={isAllImagesLoaded}
-          onClick={() => setOpenAddUsersAndTitlesDialog(true)}
-          imgUrl="/foxes.png"
-          title="Додати в лисятник"
+          onClick={() => navigate('rating')}
+          imgUrl={IMAGES.roles}
+          title="Рейтинг крихт"
+          description="Хто заробив найбільше?"
         />
-      )}
-
-      <Card
-        isLoaded={isAllImagesLoaded}
-        onClick={() => handleLink('list')}
-        imgUrl="/general.png"
-        title="Список крихт"
-      />
-
-      <Card
-        isLoaded={isAllImagesLoaded}
-        onClick={() => handleLink('rating')}
-        imgUrl="/roles.png"
-        title="Рейтинг крихт"
-      />
+      </Container>
 
       {openCookieDialog && (
         <InputCookieDialog onClose={() => setOpenCookieDialog(false)} open={openCookieDialog} />
@@ -86,7 +100,7 @@ const Cookie: FunctionComponent = () => {
           open={openAddUsersAndTitlesDialog}
         />
       )}
-    </Container>
+    </div>
   );
 };
 
@@ -97,17 +111,22 @@ type Props = {
   onClick: () => void;
   imgUrl: string;
   title: string;
+  description: string;
 };
 
-const Card: FC<Props> = ({ isLoaded, onClick, imgUrl, title }) => {
+const Card: FC<Props> = ({ isLoaded, onClick, imgUrl, title, description }) => {
   return (
     <ElementContainer onClick={onClick}>
       {!isLoaded ? (
-        <Skeleton variant="rectangular" width={220} height={200} />
+        <Skeleton variant="rectangular" width={250} height={180} />
       ) : (
         <ElementImage $url={imgUrl} />
       )}
-      <Subtitle>{title}</Subtitle>
+      <ElementContent>
+        <ElementTitle>{title}</ElementTitle>
+        <div className={s.cardDescription}>{description}</div>
+        <div className={s.cardLink}>Відкрити →</div>
+      </ElementContent>
     </ElementContainer>
   );
 };
