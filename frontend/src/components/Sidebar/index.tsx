@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, useMediaQuery } from '@mui/material';
+import clsx from 'clsx';
 import { useAuthStore } from '@/stores';
 import { usePermissions } from '@/hooks';
 import { SUBJECTS } from '@/context/casl';
@@ -18,6 +19,8 @@ import {
 } from '@mui/icons-material';
 
 export const SIDEBAR_FULL_W = 220;
+export const SIDEBAR_MINI_W = 68;
+export const SIDEBAR_BREAKPOINT = '(max-width: 900px)';
 
 type NavItemDef = {
   id: string;
@@ -32,6 +35,7 @@ const Sidebar: FC = () => {
   const { logout, isLoggedIn } = useAuthStore();
   const { hasAccess } = usePermissions();
 
+  const collapsed = useMediaQuery(SIDEBAR_BREAKPOINT);
   const isAdmin = hasAccess(SUBJECTS.PERMISSION_EDIT);
   const isShowPoll = process.env.VITE_FEATURE_POLL === 'true';
   const isShowResults =
@@ -75,14 +79,20 @@ const Sidebar: FC = () => {
   };
 
   const navBtnClass = (path: string) =>
-    [styles.navBtn, isActive(path) && styles.navBtnActive].filter(Boolean).join(' ');
+    clsx(styles.navBtn, isActive(path) && styles.navBtnActive, collapsed && styles.navBtnCollapsed);
+
+  const bottomBtnClass = (...extra: string[]) =>
+    clsx(styles.navBtn, collapsed && styles.navBtnCollapsed, ...extra);
 
   return (
-    <aside className={`${styles.sidebar}`}>
+    <aside
+      className={[styles.sidebar, collapsed && styles.sidebarCollapsed].filter(Boolean).join(' ')}
+    >
       <div className={styles.logoRow}>
         <div className={styles.logoAvatar}>
           <img src="/logo.jpg" className={styles.logoImg} alt="Inari" />
         </div>
+        {!collapsed && <span className={styles.logoName}>Inari</span>}
       </div>
 
       <nav className={styles.nav}>
@@ -91,10 +101,10 @@ const Sidebar: FC = () => {
             key={item.id}
             onClick={() => navigate(item.path)}
             className={navBtnClass(item.path)}
-            startIcon={item.icon}
+            startIcon={collapsed ? undefined : item.icon}
             fullWidth
           >
-            {item.label}
+            {collapsed ? item.icon : item.label}
           </Button>
         ))}
       </nav>
@@ -103,18 +113,18 @@ const Sidebar: FC = () => {
         <Button
           onClick={() => navigate('/profile')}
           className={navBtnClass('/profile')}
-          startIcon={<Person2Outlined />}
+          startIcon={collapsed ? undefined : <Person2Outlined />}
           fullWidth
         >
-          Профіль
+          {collapsed ? <Person2Outlined /> : 'Профіль'}
         </Button>
         <Button
           onClick={handleLogout}
-          className={`${styles.navBtn} ${styles.logoutBtn}`}
-          startIcon={<LogoutOutlined />}
+          className={bottomBtnClass(styles.logoutBtn)}
+          startIcon={collapsed ? undefined : <LogoutOutlined />}
           fullWidth
         >
-          Вийти
+          {collapsed ? <LogoutOutlined /> : 'Вийти'}
         </Button>
       </div>
     </aside>
