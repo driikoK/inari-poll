@@ -6,6 +6,7 @@ import { SUBJECTS } from '@/context/casl';
 
 const Vote = lazy(() => import('../pages/Vote'));
 const Result = lazy(() => import('../pages/Result'));
+const Sheet = lazy(() => import('../pages/Sheet'));
 const Cookie = lazy(() => import('../pages/Cookie'));
 const Home = lazy(() => import('../pages/Home'));
 const CookieRating = lazy(() => import('../pages/CookieRating'));
@@ -45,6 +46,10 @@ const useConditionalRoutes = () => {
             element: <Result />,
           },
         ),
+        ...conditionalRoutes(!!process.env.VITE_SHEET_EMBED_URL, {
+          path: 'sheet',
+          element: <Sheet />,
+        }),
         {
           path: 'cookie',
           element: <Cookie />,
