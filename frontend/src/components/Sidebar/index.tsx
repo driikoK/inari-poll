@@ -47,20 +47,10 @@ const Sidebar: FC = () => {
     ...(isLoggedIn
       ? [
           { id: 'cookie', path: '/cookie', label: 'Крихти', icon: <CookieOutlined /> },
-          ...(process.env.VITE_SHEET_EMBED_URL
-            ? [
-                {
-                  id: 'sheet',
-                  path: '/sheet',
-                  label: 'Лисяча комора',
-                  icon: <TableChartOutlined />,
-                },
-              ]
-            : []),
           {
             id: 'cookie-list',
             path: '/cookie/list',
-            label: 'Список',
+            label: 'Список крихт',
             icon: <FormatListBulletedOutlined />,
           },
           {
@@ -68,6 +58,16 @@ const Sidebar: FC = () => {
             path: '/cookie/rating',
             label: 'Рейтинг',
             icon: <StarBorderOutlined />,
+          },
+        ]
+      : []),
+    ...(process.env.VITE_SHEET_EMBED_URL
+      ? [
+          {
+            id: 'sheet',
+            path: '/sheet',
+            label: 'Лисяча комора',
+            icon: <TableChartOutlined />,
           },
         ]
       : []),
