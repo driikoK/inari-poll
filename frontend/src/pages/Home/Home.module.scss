@@ -1,8 +1,13 @@
 .page {
   padding: 32px;
+
+  &Statistics {
+    display: flex;
+    gap: 32px;
+    width: 100%;
+  }
 }
 
-// Hero
 .hero {
   border-radius: 20px;
   overflow: hidden;
@@ -107,15 +112,15 @@
   box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5);
 }
 
-// Stats row
 .statsRow {
   display: flex;
+  flex-direction: column;
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 32px;
+  min-width: 40%;
 }
 
-// Stat card
 .statCard {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -123,6 +128,7 @@
   padding: 20px;
   flex: 1;
   min-width: 32.5%;
+  max-height: 25%;
 }
 
 .statCardHeader {
@@ -160,13 +166,12 @@
   flex-shrink: 0;
 }
 
-// Leaderboard
 .leaderboard {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
-  max-width: 32.5%;
+  min-width: 32.5%;
 }
 
 .leaderboardTitle {

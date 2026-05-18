@@ -28,17 +28,19 @@ const Home: FunctionComponent = () => {
     <div className={styles.page}>
       <MainCard isLoggedIn={isLoggedIn} />
 
-      {isLoggedIn && members.length > 0 && (
-        <StatsRow
-          membersQuantity={members.length}
-          totalCoins={totalCoins}
-          leader={sortedMembers[0]}
-        />
-      )}
+      <div className={styles.pageStatistics}>
+        {isLoggedIn && sortedMembers.length >= LEADERS_TO_SHOW && (
+          <LeaderBoard sortedMembers={sortedMembers} />
+        )}
 
-      {isLoggedIn && sortedMembers.length >= LEADERS_TO_SHOW && (
-        <LeaderBoard sortedMembers={sortedMembers} />
-      )}
+        {isLoggedIn && members.length > 0 && (
+          <StatsRow
+            membersQuantity={members.length}
+            totalCoins={totalCoins}
+            leader={sortedMembers[0]}
+          />
+        )}
+      </div>
     </div>
   );
 };
