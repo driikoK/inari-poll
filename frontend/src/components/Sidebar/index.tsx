@@ -19,7 +19,7 @@ import {
   TableChartOutlined,
 } from '@mui/icons-material';
 
-export const SIDEBAR_FULL_W = 220;
+export const SIDEBAR_FULL_W = 200;
 export const SIDEBAR_MINI_W = 68;
 export const SIDEBAR_BREAKPOINT = '(max-width: 900px)';
 

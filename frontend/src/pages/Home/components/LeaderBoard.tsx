@@ -5,12 +5,23 @@ import { FunctionComponent } from 'react';
 export const LeaderBoard: FunctionComponent<{ sortedMembers: MemberType[] }> = ({
   sortedMembers,
 }) => {
-  const podiumColors = ['var(--accent)', 'var(--orange-light)', 'var(--teal)'];
+  const podiumColors = [
+    'var(--accent)',
+    'var(--orange-light)',
+    'var(--teal)',
+    'var(--yellow)',
+    'var(--green)',
+    'var(--red)',
+    'var(--orange)',
+    'var(--violet)',
+    'var(--text)',
+    'var(--text-muted)',
+  ];
 
   return (
     <div className={`fade-up fade-up-2 ${styles.leaderboard}`}>
-      <div className={styles.leaderboardTitle}>Топ-3 крихт 🏆</div>
-      {sortedMembers.slice(0, 3).map((member, i) => (
+      <div className={styles.leaderboardTitle}>Топ крихт 🏆</div>
+      {sortedMembers.slice(0, 10).map((member, i) => (
         <div
           key={member._id}
           className={styles.leaderboardRow}
